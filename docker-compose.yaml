@@ -1,0 +1,25 @@
+services:
+  silicon:
+    image: bityard/silicon
+    build: .
+    init: true
+    volumes:
+      - silicon_instance:/home/silicon/instance
+
+  caddy:
+    image: caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    env_file: .env
+    depends_on:
+      - silicon
+
+volumes:
+  silicon_instance:
+  caddy_data:
+  caddy_config:

@@ -1,0 +1,10 @@
+{
+    acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+}
+
+silicon.bityard.net {
+    reverse_proxy silicon:5000
+    basicauth /* {
+        {$BASICAUTH_USER} {$BASICAUTH_PW}
+    }
+}
