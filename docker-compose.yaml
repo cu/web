@@ -15,9 +15,11 @@ services:
       - caddy_data:/data
       - caddy_config:/config
       - ./Caddyfile:/etc/caddy/Caddyfile
-    env_file: .env
     depends_on:
       - silicon
+    environment:
+      - BASICAUTH_USER: ${BASICAUTH_USER}
+      - BASICAUTH_PW: ${BASICAUTH_PW}
 
 volumes:
   silicon_instance:
