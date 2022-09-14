@@ -1,8 +1,4 @@
-{
-    acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
-}
-
-silicon.bityard.net {
+{$SILICON_FQDN} {
     reverse_proxy silicon:5000
     basicauth /* {
         {$BASICAUTH_USER} {$BASICAUTH_PW}

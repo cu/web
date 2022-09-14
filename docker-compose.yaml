@@ -20,6 +20,7 @@ services:
     depends_on:
       - silicon
     environment:
+      SILICON_FQDN: ${SILICON_FQDN}
       BASICAUTH_USER: ${BASICAUTH_USER}
       BASICAUTH_PW: ${BASICAUTH_PW}
 
