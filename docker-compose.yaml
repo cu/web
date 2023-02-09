@@ -2,7 +2,6 @@ services:
   silicon:
     image: bityard/silicon
     build: .
-    init: true
     volumes:
       - silicon_instance:/home/silicon/instance
 
