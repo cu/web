@@ -1,6 +1,19 @@
+(trusted_proxy_list) {
+    trusted_proxies 172.17.0.0/16
+}
+
+{$AUTH_FQDN} {
+    reverse_proxy authelia:9091 {
+        import trusted_proxy_list
+    }
+}
+
 {$SILICON_FQDN} {
-    reverse_proxy silicon:5000
-    basicauth /* {
-        {$BASICAUTH_USER} {$BASICAUTH_PW}
+    forward_auth authelia:9091 {
+        uri /api/verify?rd=https://{$AUTH_FQDN}/
+        import trusted_proxy_list
+    }
+    reverse_proxy silicon:5000 {
+        import trusted_proxy_list
     }
 }
