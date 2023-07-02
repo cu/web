@@ -1,12 +1,12 @@
 {$AUTH_FQDN} {
-    reverse_proxy authelia:9091
+    reverse_proxy authelia.:9091
 }
 
 {$SILICON_FQDN} {
-    forward_auth authelia:9091 {
+    forward_auth authelia.:9091 {
         uri /api/verify?rd=https://{$AUTH_FQDN}/
     }
-    reverse_proxy silicon:5000
+    reverse_proxy silicon.:5000
 }
 
 {$NEXTCLOUD_FQDN} {
