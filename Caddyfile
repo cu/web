@@ -17,3 +17,10 @@
         import trusted_proxy_list
     }
 }
+
+{$NEXTCLOUD_FQDN} {
+    redir /.well-known/carddav /remote.php/dav 301
+    redir /.well-known/caldav /remote.php/dav 301
+
+    reverse_proxy nextcloud.:80
+}

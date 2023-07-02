@@ -5,18 +5,32 @@ configs:
     file: ./configuration.yml
 
 networks:
+  db:
   ldap:
   authelia:
   silicon:
+  nextcloud:
 
 volumes:
+  db:
   lldap_data:
   authelia_config:
   silicon_instance:
   caddy_data:
   caddy_config:
+  nextcloud:
 
 services:
+  db:
+    image: docker.io/postgres:15
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    networks:
+      - db
+    volumes:
+      - "db:/var/lib/postgresql/data"
+    restart: unless-stopped
+
   lldap:
     # Identifies as 0.4.2-alpha
     # Check with: docker run --rm -ti nitnelave/lldap --version
@@ -64,19 +78,53 @@ services:
     environment:
       AUTH_FQDN: ${AUTH_FQDN}
       SILICON_FQDN: ${SILICON_FQDN}
+      NEXTCLOUD_FQDN: ${NEXTCLOUD_FQDN}
     configs:
       - source: caddyfile
         target: /etc/caddy/Caddyfile
     depends_on:
       - authelia
       - silicon
+      - nextcloud
     ports:
       - "80:80"
       - "443:443"
     networks:
       - authelia
       - silicon
+      - nextcloud
     volumes:
       - caddy_data:/data
       - caddy_config:/config
     restart: unless-stopped
+
+  nextcloud: &nextcloud
+    image: docker.io/nextcloud:27.0.0
+    environment:
+      TZ: ${TZ}
+      NEXTCLOUD_DBTYPE: ${NEXTCLOUD_DBTYPE}
+      NEXTCLOUD_DBHOST: ${NEXTCLOUD_DBHOST}
+      NEXTCLOUD_DBUSER: ${NEXTCLOUD_DBUSER}
+      NEXTCLOUD_DBPASSWORD: ${NEXTCLOUD_DBPASSWORD}
+      NEXTCLOUD_DBNAME: ${NEXTCLOUD_DBNAME}
+      NEXTCLOUD_DBTABLEPREFIX: ${NEXTCLOUD_DBTABLEPREFIX}
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_SECURE: ${SMTP_SECURE}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_AUTHTYPE: ${SMTP_AUTHTYPE}
+      SMTP_NAME: ${SMTP_NAME}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+      MAIL_FROM_ADDRESS: ${MAIL_FROM_ADDRESS}
+      MAIL_DOMAIN: ${MAIL_DOMAIN}
+    depends_on:
+      - db
+    networks:
+      - db
+      - nextcloud
+    volumes:
+      - nextcloud:/var/www/html
+    restart: unless-stopped
+
+  nextcloud-cron:
+    <<: *nextcloud
+    entrypoint: /cron.sh
