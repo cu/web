@@ -15,3 +15,9 @@
 
     reverse_proxy nextcloud.:80
 }
+
+{$IPV4_FQDN} {
+    handle / {
+        respond {remote_host}
+    }
+}

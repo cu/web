@@ -79,6 +79,7 @@ services:
       AUTH_FQDN: ${AUTH_FQDN}
       SILICON_FQDN: ${SILICON_FQDN}
       NEXTCLOUD_FQDN: ${NEXTCLOUD_FQDN}
+      IPV4_FQDN: ${IPV4_FQDN}
     configs:
       - source: caddyfile
         target: /etc/caddy/Caddyfile
