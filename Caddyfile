@@ -1,3 +1,11 @@
+{$ROOT_DN} {
+    @http {
+        protocol http
+    }
+    redir @http {$ROOT_REDIRECT} permanent
+    redir {$ROOT_REDIRECT} permanent
+}
+
 {$AUTH_FQDN} {
     reverse_proxy authelia.:9091
 }
@@ -10,8 +18,8 @@
 }
 
 {$NEXTCLOUD_FQDN} {
-    redir /.well-known/carddav /remote.php/dav 301
-    redir /.well-known/caldav /remote.php/dav 301
+    redir /.well-known/carddav /remote.php/dav permanent
+    redir /.well-known/caldav /remote.php/dav permanent
 
     reverse_proxy nextcloud.:80
 }
