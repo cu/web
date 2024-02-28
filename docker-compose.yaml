@@ -10,6 +10,7 @@ networks:
   authelia:
   silicon:
   nextcloud:
+  yarr:
 
 volumes:
   db:
@@ -19,6 +20,7 @@ volumes:
   caddy_data:
   caddy_config:
   nextcloud:
+  yarr:
 
 services:
   db:
@@ -131,3 +133,11 @@ services:
   nextcloud-cron:
     <<: *nextcloud
     entrypoint: /cron.sh
+
+  yarr:
+    image: ghcr.io/wakeful-cloud/yarr:sha-d15b43b
+    networks:
+      - yarr
+    volumes:
+      - yarr:/data
+    restart: unless-stopped

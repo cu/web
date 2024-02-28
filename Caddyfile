@@ -24,6 +24,14 @@
     reverse_proxy nextcloud.:80
 }
 
+{$YARR_FQDN} {
+    forward_auth authelia.:9091 {
+        uri /api/verify?rd=https://{$AUTH_FQDN}/
+    }
+    reverse_proxy yarr.:7070
+}
+
+
 {$IPV4_FQDN} {
     handle / {
         respond {remote_host}
