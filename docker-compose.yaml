@@ -82,6 +82,7 @@ services:
       SILICON_FQDN: ${SILICON_FQDN}
       NEXTCLOUD_FQDN: ${NEXTCLOUD_FQDN}
       IPV4_FQDN: ${IPV4_FQDN}
+      YARR_FQDN: ${YARR_FQDN}
       ROOT_DN: ${ROOT_DN}
       ROOT_REDIRECT: ${ROOT_REDIRECT}
     configs:
