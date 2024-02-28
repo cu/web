@@ -13,3 +13,20 @@
 3. Edit stuff
 4. `./secrets.sh encrypt`
 5. Push
+
+## Simple caddy/authelia app
+
+Steps to take to add a simple app, e.g. Silicon. Quite a lot to do,
+unfortunately.
+
+1. Decrypt `.env` and edit:
+  * Add `FOO_FQDN`
+  * Duplicate into `.env.sc`
+  * Suplicate into `.env-example`
+2. Edit `docker-compose.yaml`
+  * Add volume
+  * Add network
+  * Add `FOO_FQDN` to caddy's environment
+  * Add foo network to caddy's network
+  * Add foo service
+3. Add configuration to `Caddyfile`

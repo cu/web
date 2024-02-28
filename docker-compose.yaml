@@ -99,6 +99,7 @@ services:
       - authelia
       - silicon
       - nextcloud
+      - yarr
     volumes:
       - caddy_data:/data
       - caddy_config:/config
