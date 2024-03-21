@@ -21,8 +21,8 @@ unfortunately.
 
 1. Decrypt `.env` and edit:
   * Add `FOO_FQDN`
-  * Duplicate into `.env.sc`
-  * Suplicate into `.env-example`
+  * Encrypt into `.env.sc`
+  * Duplicate into `.env-example`
 2. Edit `docker-compose.yaml`
   * Add volume
   * Add network
