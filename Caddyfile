@@ -33,10 +33,6 @@
     reverse_proxy yarr.:7070
 }
 
-{$MAGNOTES_FQDN}
-    reverse_proxy magnotes.:3000
-}
-
 {$IPV4_FQDN} {
     handle / {
         respond {remote_host}

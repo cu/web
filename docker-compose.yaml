@@ -11,7 +11,6 @@ networks:
   silicon:
   nextcloud:
   yarr:
-  magnotes:
 
 volumes:
   db:
@@ -95,7 +94,6 @@ services:
       - silicon
       - nextcloud
       - yarr
-      - magnotes
     ports:
       - "80:80"
       - "443:443"
@@ -104,7 +102,6 @@ services:
       - silicon
       - nextcloud
       - yarr
-      - magnotes
     volumes:
       - caddy_data:/data
       - caddy_config:/config
@@ -147,20 +144,4 @@ services:
       - yarr
     volumes:
       - yarr:/data
-    restart: unless-stopped
-
-  magnotes:
-    image: ghcr.io/requarks/wiki:2
-    depends_on:
-      - db
-    networks:
-      - db
-      - magnotes
-    environment:
-      DB_TYPE: postgres
-      DB_HOST: db.
-      DB_PORT: 5432
-      DB_USER: ${MAGNOTES_DBUSER}
-      DB_PASS: ${MAGNOTES_DBPASS}
-      DB_NAME: magnotes
     restart: unless-stopped
