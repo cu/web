@@ -74,7 +74,7 @@ services:
     restart: unless-stopped
 
   caddy:
-    image: docker.io/caddy:2.6.2
+    image: docker.io/caddy:2.8.4
     environment:
       AUTH_FQDN: ${AUTH_FQDN}
       SILICON_FQDN: ${SILICON_FQDN}
