@@ -49,7 +49,7 @@ services:
     restart: unless-stopped
 
   authelia:
-    image: docker.io/authelia/authelia:4.37.5
+    image: docker.io/authelia/authelia:4.38.9
     environment:
       - AUTHELIA_JWT_SECRET=${AUTHELIA_JWT_SECRET}
       - AUTHELIA_STORAGE_ENCRYPTION_KEY=${AUTHELIA_STORAGE_ENCRYPTION_KEY}
