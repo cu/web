@@ -108,7 +108,7 @@ services:
     restart: unless-stopped
 
   nextcloud: &nextcloud
-    image: docker.io/nextcloud:27.1.4
+    image: docker.io/nextcloud:29.0.3
     environment:
       TZ: ${TZ}
       NEXTCLOUD_DBTYPE: ${NEXTCLOUD_DBTYPE}
