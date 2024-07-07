@@ -34,9 +34,7 @@ services:
     restart: unless-stopped
 
   lldap:
-    # Identifies as 0.4.2-alpha
-    # Check with: docker run --rm -ti nitnelave/lldap --version
-    image: docker.io/nitnelave/lldap@sha256:926c7576b12e90546c10a01349ed5ee8e9921863719e8db5ea15b15957f4639e
+    image: docker.io/lldap/lldap:v0.5.0
     environment:
       - TZ=America/Detroit
       - LLDAP_JWT_SECRET=${LLDAP_JWT_SECRET}
