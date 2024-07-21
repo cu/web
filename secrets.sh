@@ -22,7 +22,10 @@ decrypt)
     read -p "Passphrase: " -s p; echo
 
     for f in ${enc_files[@]}; do
-        f=$f.sc
+        dec_files+=($f.sc)
+    done
+
+    for f in ${dec_files[@]}; do
         echo "Decrypting $f to ${f%.sc}"
         echo $p | scrypt dec -P $f ${f%.sc}
     done
