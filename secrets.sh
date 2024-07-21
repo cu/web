@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Truly marginal secrets management
 
-readonly enc_files="configuration.yml *.env"
+readonly enc_files=(configuration.yml *.env)
 
 case $1 in
 encrypt)
@@ -13,7 +13,7 @@ encrypt)
         exit 1
     fi
 
-    for f in $enc_files; do
+    for f in ${enc_files[@]}; do
         echo "Encrypting $f to $f.sc"
         echo $p | scrypt enc -P -M $((2**28)) -t 1 $f $f.sc
     done
@@ -21,9 +21,10 @@ encrypt)
 decrypt)
     read -p "Passphrase: " -s p; echo
 
-    for f in $enc_files; do
-        echo "Decrypting $f.sc to $f"
-        echo $p | scrypt dec -P $f.sc $f
+    for f in ${enc_files[@]}; do
+        f=$f.sc
+        echo "Decrypting $f to ${f%.sc}"
+        echo $p | scrypt dec -P $f ${f%.sc}
     done
     ;;
 esac
