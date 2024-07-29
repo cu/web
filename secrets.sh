@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Truly marginal secrets management
 
-readonly enc_files=(configuration.yml *.env)
+readonly enc_files=(configuration.yml invidious-config.yml *.env)
 
 case $1 in
 encrypt)

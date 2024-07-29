@@ -38,3 +38,10 @@
         respond {remote_host}
     }
 }
+
+{$TUBE_FQDN} {
+    forward_auth authelia.:9091 {
+        uri /api/verify?rd=https://{$AUTH_FQDN}/
+    }
+    reverse_proxy tube.:3000
+}

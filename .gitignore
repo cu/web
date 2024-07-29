@@ -1,2 +1,3 @@
 *.env
 configuration.yml
+invidious-config.yml

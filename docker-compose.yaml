@@ -3,6 +3,8 @@ configs:
     file: ./Caddyfile
   authelia:
     file: ./configuration.yml
+  tube:
+    file: ./invidious-config.yml
 
 networks:
   db:
@@ -11,6 +13,8 @@ networks:
   silicon:
   nextcloud:
   yarr:
+  tube:
+  tubedb:
 
 volumes:
   db16:
@@ -21,6 +25,7 @@ volumes:
   caddy_config:
   nextcloud:
   yarr:
+  tubedb14:
 
 services:
   db:
@@ -90,6 +95,7 @@ services:
       - silicon
       - nextcloud
       - yarr
+      - tube
     volumes:
       - caddy_data:/data
       - caddy_config:/config
@@ -119,4 +125,26 @@ services:
       - yarr
     volumes:
       - yarr:/data
+    restart: unless-stopped
+
+  tubedb:
+    image: docker.io/library/postgres:14
+    env_file:
+      - tubedb.env
+    volumes:
+      - tubedb14:/var/lib/postgresql/data
+    networks:
+      - tubedb
+    restart: unless-stopped
+
+  tube:
+    image: quay.io/invidious/invidious:master-arm64
+    depends_on:
+      - tubedb
+    configs:
+      - source: tube
+        target: /invidious/config/config.yml
+    networks:
+      - tube
+      - tubedb
     restart: unless-stopped
