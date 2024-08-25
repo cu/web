@@ -136,6 +136,20 @@ services:
     networks:
       - tubedb
     restart: unless-stopped
+  
+  inv_sig_helper:
+    image: quay.io/invidious/inv-sig-helper:latest
+    command: ["--tcp", "0.0.0.0:12999"]
+    networks:
+      - tube
+    environment:
+      - RUST_LOG=info
+    restart: unless-stopped
+    cap_drop:
+      - ALL
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
 
   tube:
     image: quay.io/invidious/invidious:master-arm64
