@@ -45,3 +45,7 @@
     }
     reverse_proxy tube.:3000
 }
+
+{$LOUNGE_FQDN} {
+    reverse_proxy thelounge.:9000
+}

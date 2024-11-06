@@ -5,6 +5,8 @@ configs:
     file: ./configuration.yml
   tube:
     file: ./invidious-config.yml
+  thelounge:
+    file: ./thelounge-config.js
 
 networks:
   db:
@@ -15,6 +17,7 @@ networks:
   yarr:
   tube:
   tubedb:
+  thelounge:
 
 volumes:
   db16:
@@ -26,6 +29,7 @@ volumes:
   nextcloud:
   yarr:
   tubedb14:
+  thelounge:
 
 services:
   db:
@@ -96,6 +100,7 @@ services:
       - nextcloud
       - yarr
       - tube
+      - thelounge
     volumes:
       - caddy_data:/data
       - caddy_config:/config
@@ -136,7 +141,7 @@ services:
     networks:
       - tubedb
     restart: unless-stopped
-  
+
   inv_sig_helper:
     image: quay.io/invidious/inv-sig-helper:latest
     command: ["--tcp", "0.0.0.0:12999"]
@@ -161,4 +166,18 @@ services:
     networks:
       - tube
       - tubedb
+    restart: unless-stopped
+
+  thelounge:
+    image: ghcr.io/thelounge/thelounge:latest
+    depends_on:
+      - caddy
+    configs:
+      - source: thelounge
+        target: /var/opt/thelounge/config.js
+    volumes:
+      - thelounge:/var/opt/thelounge
+    networks:
+      - thelounge
+      - ldap
     restart: unless-stopped

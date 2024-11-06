@@ -21,7 +21,7 @@ unfortunately.
 
 1. Decrypt `*.env` and edit:
   * Add `FOO_FQDN` to caddy.env
-  * Add `FOO_FQND` to "Environment variables" section in this file
+  * Add `FOO_FQDN` to "Environment variables" section in this file
   * Encrypt into `*.env.sc`
 2. Edit `docker-compose.yaml`
   * Add volume
@@ -64,6 +64,7 @@ SILICON_FQDN=wiki.example.com
 NEXTCLOUD_FQDN=cloud.example.com
 IPV4_FQDN=ipv4.example.com
 YARR_FQDN=yarr.example.com
+LOUNGE_FQDN=lounge.bityard.net
 ```
 
 ## db.env
