@@ -125,7 +125,7 @@ services:
     entrypoint: /cron.sh
 
   yarr:
-    image: ghcr.io/wakeful-cloud/yarr:sha-d15b43b
+    image: ghcr.io/wakeful-cloud/yarr:sha-b2ee7c1
     networks:
       - yarr
     volumes:
