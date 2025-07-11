@@ -107,7 +107,7 @@ services:
     restart: unless-stopped
 
   nextcloud: &nextcloud
-    image: docker.io/nextcloud:29.0.3
+    image: docker.io/nextcloud:31.0.6
     env_file:
       - tz.env
       - nextcloud.env
