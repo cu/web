@@ -56,7 +56,7 @@ services:
     restart: unless-stopped
 
   authelia:
-    image: docker.io/authelia/authelia:4.38.9
+    image: docker.io/authelia/authelia:4.39.4
     env_file:
       - authelia.env
     configs:
