@@ -43,7 +43,7 @@ services:
     restart: unless-stopped
 
   lldap:
-    image: docker.io/lldap/lldap:v0.5.0
+    image: docker.io/lldap/lldap:v0.6.1-alpine-rootless
     env_file:
       - tz.env
       - lldap.env
