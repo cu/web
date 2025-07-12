@@ -80,7 +80,7 @@ services:
     restart: unless-stopped
 
   caddy:
-    image: docker.io/caddy:2.8.4
+    image: docker.io/caddy:2.10.0
     env_file:
       - caddy.env
     configs:
