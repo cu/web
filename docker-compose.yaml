@@ -157,7 +157,7 @@ services:
       - no-new-privileges:true
 
   tube:
-    image: quay.io/invidious/invidious:master-arm64
+    image: quay.io/invidious/invidious:2025.05.28-df8839d-arm64
     depends_on:
       - tubedb
     configs:
@@ -169,7 +169,7 @@ services:
     restart: unless-stopped
 
   thelounge:
-    image: ghcr.io/thelounge/thelounge:latest
+    image: ghcr.io/thelounge/thelounge:4.4.3
     depends_on:
       - caddy
     configs:
